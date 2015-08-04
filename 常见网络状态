@@ -1,0 +1,35 @@
+200 OK
+201 Created
+通过post/put创建一个资源成功后返回的状态码，同时需要在header的Location字段中给出看看创建好资源的URI
+202 Accepted
+服务器接受到请求后，需要异步执行后才能返回结构，又不想保持tcp连接，那么就返回该状态码
+204 No content
+服务器接完整接收到put/post请求后，不需要给客户端提供额外的更新或返回内容，一般情况下此时客户端和服务器端一致，此时可返回次状态码
+206 Partial Content
+使用于断点续传和多线程下载，同时需要在header的Content-Range字段中给出范围
+
+301 Moved Permanently
+永久性重定向，需要在header的Location中给出重定向的url，按原请求方式继续请求，如果是get和head以为的请求，需要询问客户是否继续请求
+302 Found
+临时性重定向，存在二义性，有的浏览器无论原来是按照何种方式请求的，都按照get请求
+303 See Other
+临时性重定向，无论原来是按照何种方式请求的，都按照get请求
+304 Not Modified
+如果Get请求的资源没有被修改过，告诉客户端可以用之前的版本，判断的条件是   If-Modified-Since  或  If-None-Match  字段
+307 Temporary Redirect
+临时性重定向，按照原来的方式继续请求
+
+400 Bad Request
+401 Unauthorized
+未经授权的请求，如果请求时header未带Authorization字段，在返回的header中需要通过WWW-Authorization指明登录方式；如果请求是已经有Authorization字段，则表明登录名不存在
+402 Payment Required
+403 Forbidden
+404 Not Found
+405 Method Not Allowed
+一些只读的资源不允许post/put
+409 Conflict
+410 Gone
+永久删除
+
+500 Internal Server Error
+503 Service Unavailable
